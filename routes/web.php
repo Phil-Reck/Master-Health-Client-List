@@ -50,6 +50,10 @@ Route::prefix('client')->group(function () {
 });
 
 
+Route::get('/reports', function () {
+    return view('reports');
+});
+
 Route::get('/search-client', function () {
     return view('search');
 })->middleware(['auth'])->name('search-client');
