@@ -17,18 +17,22 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('layouts.main');
 })->middleware(['auth'])->name('main');
+Route::get('/', function () {
+    return view('welcome');
+})->middleware(['auth'])->name('main');
 
-Route::get('/facilities', function () {
-    return view('facilities');
-})->middleware(['auth'])->name('facilities');
+// Route::get('/facilities', function () {
+//     return view('facilities');
+// })->middleware(['auth'])->name('facilities');
 
 Route::prefix('facilities')->group(function () {
     Route::get('/', 'App\Http\Controllers\FacilityController@index');
     Route::post('/create', 'App\Http\Controllers\FacilityController@create');
     Route::get('edit/{id}', 'App\Http\Controllers\FacilityController@edit');
+    Route::post('update/', 'App\Http\Controllers\FacilityController@update');
     // Route::get("timetable/{email}", "LecturerController@lecTimetable");
 });
 
@@ -38,9 +42,13 @@ Route::get('/community-units', function () {
     return view('community-units');
 })->middleware(['auth'])->name('community-units');
 
-Route::get('/register-client', function () {
-    return view('register-client');
-})->middleware(['auth'])->name('register-client');
+Route::prefix('client')->group(function () {
+    Route::get('/register', 'App\Http\Controllers\ClientController@index');
+    Route::post('/create', 'App\Http\Controllers\ClientController@create');
+    Route::get('/search', 'App\Http\Controllers\ClientController@search');
+    Route::get('/summary', 'App\Http\Controllers\ClientController@summary');
+});
+
 
 Route::get('/search-client', function () {
     return view('search');

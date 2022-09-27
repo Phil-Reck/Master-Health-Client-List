@@ -19,7 +19,7 @@ Facility Master List
   
             <div class="">
                 {{-- <a href="#" class="">Create facility</a></div> --}}
-                <a class="float-right btn btn-sm btn-primary" data-toggle="modal" data-target="#newProgramModal"><span class="fas fa-plus"></span>&nbsp;Create Facility </a>
+                <a class="float-right btn btn-info btn-sm" data-toggle="modal" data-target="#newProgramModal"><span class="fas fa-plus"></span>&nbsp;Create Facility </a>
             </div>
           </div>
           <div class="card-body">

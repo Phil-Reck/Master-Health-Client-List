@@ -1,156 +1,201 @@
 @extends('layouts.main')
+@section("title", "Clients")
+@section('Page-Title')
+All Clients
+@endsection
 @section('content')
+<div class="input-group float-lefts" style="margin-bottom:7px; margin-left:-10px;">
 
-<div class="container" style="width:auto%; margin-left:auto; margin-right:auto; padding-top:15%;">
-    <section class="search-sec">
-        <div class="container">
-            <form method="post" action="{{ url('/search-query/') }}" style="" novalidate="novalidate">
-                @csrf
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <input id="queryData" name="actual_search" type="text" class="form-control search-slt"
-                                    placeholder="Enter Search">
-                            </div>
-                            &nbsp;
-                            &nbsp;
-                            <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                <select name="search_criteria" class="form-control search-slt" required>
-                                    <option>Choose Criteria</option>
-                                    <option>
-                                        <a>
-                                            <p>Client Name</p>
-                                        </a href="#">
-                                    </option>
-                                    <!--                               1 star and up -->
-                                    <option>
-                                        <a>
-                                            <p>Facility</p>
-                                        </a href="#">
-                                    </option>
-                                    <option>
-                                        <a>
-                                            <p>National ID Number</p>
-                                        </a href="#">
-                                    </option>
-                                    <option>
-                                        <a>
-                                            <p>CCC Number</p>
-                                        </a href="#">
-                                    </option>
-                                </select>
-                            </div>
-                            {{-- &nbsp;
-                            &nbsp; --}}
-                            <div class="col-lg-2 col-md-2 col-sm-12">
-                                <button class="btn btn-success" type="submit">search</button>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <table style="width: 100%" id="example3" class="table table-bordered table-striped">
-                <thead>
-                    <tr style="color: green;">
-                        <th style="width: 20%">CCC No.</th>
-                        <th style="width: 20%">Firstname</th>
-                        <th style="width: 20%">Midlename</th>
-                        <th style="width: 20%">Lastname</th>
-                        <th style="width: 20%">DOB</th>
-                        <th style="width: 20%">ID No.</th>
-                        <th style="width: 20%">Facility</th>
-                        {{-- <th>Transfer Status</th>--}}
-                        <center>
-                            <th colspan="2">Tools</th>
-                        </center>
-                    </tr>
-                </thead>
-
-                <tr>
-                    {{-- @foreach ($users as $user)
-                <tr style="margin-left: 20px;">
-                    <td>{{ $user->CCC_Number }}</td>
-                    <td>{{ $user->fname}}</td>
-                    <td>{{ $user->mname}}</td>
-                    <td>{{ $user->lname }}</td>
-                    <td>{{ $user->dob}}</td>
-                    <td>{{ $user->id_no}}</td>
-                    <td>{{$user->facility_id}}{{$user->name}}</td>
-                    <td><a href='edit/{{ $user->id }}'><button class="btn btn-success">Initiate
-                                Transfer</button></a></td>
-                    <td><a href='update_client/{{ $user->id }}'><button
-                                class="btn btn-success">Edit</button></a>
-                        @endforeach --}}
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    &nbsp;&nbsp;&nbsp;
+    <div class="mt-22 input-group-prepend">
+        <span class="input-group-text" id=""><span class="fas fa-search"></span>&nbsp; Search for a Client </span>
+    </div>
+    <input id="myInput" placeholder="e.g Names, Gender, By Facility, Unique Patient ID & By County" type="text" class="form-control">
+    {{-- <input type="text" class="form-control"> --}}
 </div>
+
+<!-- Default box -->
+<div class="card mt-22">
+    </div>
+
+        <table id="example3" class="display dataTable table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 8%">
+                        First Name
+                    </th>
+                    <th style="width: 15%">
+                        Last Name
+                    </th>
+                    <th style="width: 10%">
+                        Gender
+                    </th>
+                    <th style="width: 15%">
+                        Facility
+                    </th>
+                    <th style="width: 10%">
+                        Uniques Patient ID
+                    </th>
+                    <th style="width: 10%">
+                        County
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach($clients as $client)
+                <tr data-toggle="tooltip" title="Click to edit">
+                    <td data-toggle="tooltip" data-placement="bottom" title="{{$client->fname}}">{{$client->fname}}</td>
+                    <td data-toggle="tooltip" data-placement="bottom" title="{{$client->lname}}">{{$client->lname}}</td>
+                    <td data-toggle="tooltip" data-placement="bottom" title="{{$client->gender}}">{{$client->gender}}</td>
+                    <td data-toggle="tooltip" data-placement="bottom" title="{{$client->facility_id}}">{{$client->facility_id}}</td>
+                    <td data-toggle="tooltip" data-placement="bottom" title="{{$client->UID_Number}}">{{$client->UID_Number}}</td>
+                    <td data-toggle="tooltip" data-placement="bottom" title="{{$client->county}}">{{$client->county}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+</div>
+<!-- /.card -->
+<br>
+
+@endsection
 <script>
-    $(document).ready(function(){
-        $("#queryData").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#example3 tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $(document).ready(function() {
+      $("#myInput").on("keyup", function() {
+        alert('working')
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+@section('jscontent')
+<script>
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+
+    });
+</script>
+<script>
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    function topBar(message) {
+        $("<div />", {
+                'class': 'topbar',
+                text: message
+            }).hide().prependTo('body')
+            .slideDown('fast').delay(5000).slideUp(function() {
+                $(this).remove();
             });
+    }
+
+    function submitChange(formData) {
+        $.ajax({
+            url: "{{url('editcohort')}}",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            processData: false,
+            success: function(data) {
+                console.log('success');
+            },
+            error: function(data) {
+                //alert("Error");
+                console.log('error');
+            },
+            complete: function(data) {
+                toastr.success('Cohort updated successfully.')
+            }
+        });
+    }
+
+    function saveChange(id) {
+        var num_students = $('#numStudents' + id).val();
+
+        if (num_students < 0) {
+            alert("Number of students cannot be less than zero");
+            $('#numStudents' + id).val(0);
+        } else {
+            var formData = new FormData();
+            formData.append("level_id", id);
+            formData.append("num_students", num_students);
+
+            if ($('#inSession' + id).is(':checked')) {
+                formData.append("in_session", "on")
+            } else {
+            }
+            submitChange(formData);
+        }
+    }
+
+    $(document).ready(function() {
+        $('#cohorts.table').DataTable();
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
         });
     });
-//     $(document).mouseup(function(e)
-//         {
-//             var container = $(".textInput");
-//             if (!container.is(e.target) && container.has(e.target).length === 3)
-//         {
-//             container.hide();
-//             }
-//         });
-// });
-    // $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-    // $(function() {
-    // $("#example1").DataTable({
-    //   "responsive": true,
-    //   "lengthChange": false,
-    //   "autoWidth": false,
-    //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    // $('#example2').DataTable({
-    //   "paging": true,
-    //   "lengthChange": false,
-    //   "searching": false,
-    //   "ordering": true,
-    //   "info": true,
-    //   "autoWidth": false,
-    //   "responsive": true,
-    // });
-    // $('#quickForm').validate({
-    //   rules: {
-    //     name: {
-    //       required: true,
-    //       name: true,
-    //     },
-    //   },
-    //   messages: {
-    //     name: {
-    //       required: "Please enter a client name ",
-    //       email: "Please enter a vaild client name "
-    //     },
-    //   },
-    //   errorElement: 'span',
-    //   errorPlacement: function(error, element) {
-    //     error.addClass('invalid-feedback');
-    //     element.closest('.form-group').append(error);
-    //   },
-    //   highlight: function(element, errorClass, validClass) {
-    //     $(element).addClass('is-invalid');
-    //   },
-    //   unhighlight: function(element, errorClass, validClass) {
-    //     $(element).removeClass('is-invalid');
-    //   }
-    // });
-    // });
-    // });
+
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("example2");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    jQuery(function() {
+        // $.post(
+        jQuery('#s_cohorts').change(function() {
+            this.form.submit();
+
+        });
+        // );
+
+    });
 </script>
 @endsection

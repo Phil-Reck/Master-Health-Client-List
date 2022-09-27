@@ -58,7 +58,7 @@ class FacilityController extends Controller
             'no_of_nurses' => $request->nurses,
         ]);
 
-        return redirect()->route('facilities');
+        return back();
     }
 
     /**
@@ -89,11 +89,18 @@ class FacilityController extends Controller
      * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function edit(Facility $facility)
+    public function edit(Facility $facility, $id)
     {
         $facility = Facility::all();
-        dd($facility);
-        return view('edit-facility', compact('facility'));
+        $facility_id = Facility::find($id)->id;
+        $facility_name = Facility::find($id)->name;
+        $facility_code = Facility::find($id)->mfl_code;
+        $facility_type = Facility::find($id)->facility_type;
+        $facility_status = Facility::find($id)->operational_status;
+        $facility_doctors = Facility::find($id)->no_of_doctors;
+        $facility_nurses = Facility::find($id)->no_of_nurses;
+        // dd($facility_name);
+        return view('edit-facility', compact('facility', 'facility_name', 'facility_code', 'facility_type', 'facility_status', 'facility_doctors', 'facility_nurses', 'facility_id'));
     }
 
     /**
@@ -103,10 +110,23 @@ class FacilityController extends Controller
      * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFacilityRequest $request, Facility $facility)
+    public function update(Request $request)
     {
-        //
+        $data = $request->validate([
+            'facility_name' => 'required',
+            'mfl_code' => 'required',
+            'facility_type' => 'required',
+            'services' => 'required',
+            'status' => 'required',
+            'doctors' => 'required',
+            'nurses' => 'required',
+        ]);
+
+        Facility::where('id', $request -> input('facility_id'))->update($data);
+
+        return redirect('facilities');
     }
+
 
     /**
      * Remove the specified resource from storage.

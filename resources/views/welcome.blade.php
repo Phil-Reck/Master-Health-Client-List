@@ -1,68 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Lockscreen</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
+@section('Page-Title')
+Welcome, {{ Auth::user()->name }}
+@endsection
+@section('content')
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition lockscreen">
-<!-- Automatic element centering -->
-<div class="lockscreen-wrapper">
-  <div class="lockscreen-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
-  </div>
-  <!-- User name -->
-  <div class="lockscreen-name">John Doe</div>
+    <!-- /.content -->
+    <!-- Main content -->
+  
+      <!-- Main content -->
+      <section class="content">
+  
+        <!-- Default box -->
+        <h5 class="mt-4 mb-2">Master Health Facility Client List</h5>
 
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="lockscreen-item">
-    <!-- lockscreen image -->
-    <div class="lockscreen-image">
-      <img src="../../dist/img/user1-128x128.jpg" alt="User Image">
-    </div>
-    <!-- /.lockscreen-image -->
+        <div class="row">
+          <!-- /.col -->
 
-    <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials">
-      <div class="input-group">
-        <input type="password" class="form-control" placeholder="password">
+          <div class="col-md-12">
+            <div class="card card-default">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-list"></i>
+                  Master Facility & Client List
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="callout callout-info">
+                  <h5>Master Health Facility List</h5>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="/facilities" class="nav-link">
+                        <p>Facilities</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/common-units" class="nav-link">
+                        <p>Common Units</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="callout callout-warning">
+                  <h5>Master Health Client List</h5>
 
-        <div class="input-group-append">
-          <button type="button" class="btn"><i class="fas fa-arrow-right text-muted"></i></button>
+                      <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                          <a href="/client/register" class="nav-link">
+                    
+                            <p>Register</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="/client/search" class="nav-link">
+                            <p>Search</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="/client/summary" class="nav-link">
+                            <p>Patient Summary</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="../tables/jsgrid.html" class="nav-link">
+                            <p>Reports</p>
+                          </a>
+                        </li>
+                      </ul>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
         </div>
-      </div>
-    </form>
-    <!-- /.lockscreen credentials -->
-
-  </div>
-  <!-- /.lockscreen-item -->
-  <div class="help-block text-center">
-    Enter your password to retrieve your session
-  </div>
-  <div class="text-center">
-    <a href="login.html">Or sign in as a different user</a>
-  </div>
-  <div class="lockscreen-footer text-center">
-    Copyright &copy; 2014-2019 <b><a href="http://adminlte.io" class="text-black">AdminLTE.io</a></b><br>
-    All rights reserved
-  </div>
-</div>
-<!-- /.center -->
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <!-- /.card -->
+  
+      </section>
+      
+@endsection
