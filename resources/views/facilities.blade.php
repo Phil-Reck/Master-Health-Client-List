@@ -36,7 +36,7 @@ Facility Master List
                   <div class="col-12 col-sm-4">
                     <div class="info-box bg-light">
                       <div class="info-box-content">
-                        <span class="info-box-text text-center text-muted">Estimated budget</span>
+                        <span class="info-box-text text-center text-muted">Total Facilities in Kenya</span>
                         <span class="info-box-number text-center text-muted mb-0">2300</span>
                       </div>
                     </div>
@@ -44,7 +44,7 @@ Facility Master List
                   <div class="col-12 col-sm-4">
                     <div class="info-box bg-light">
                       <div class="info-box-content">
-                        <span class="info-box-text text-center text-muted">Total amount spent</span>
+                        <span class="info-box-text text-center text-muted">Total Number of Doctors in Kenya</span>
                         <span class="info-box-number text-center text-muted mb-0">2000</span>
                       </div>
                     </div>
@@ -52,8 +52,8 @@ Facility Master List
                   <div class="col-12 col-sm-4">
                     <div class="info-box bg-light">
                       <div class="info-box-content">
-                        <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                        <span class="info-box-number text-center text-muted mb-0">20 <span>
+                        <span class="info-box-text text-center text-muted">Total Number of Doctors in Kenya</span>
+                        <span class="info-box-number text-center text-muted mb-0">2050<span>
                       </div>
                     </div>
                   </div>
@@ -151,7 +151,7 @@ Facility Master List
                                   </i>
                                   Edit
                                 </a>
-                                <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-{{$facility->id}}">
+                                <a class="btn btn-danger btn-sm" href="{{url('facilities/delete/'.$facility->id)}}" data-toggle="modal" data-target="#delete-{{$facility->id}}">
                                   <i class="fas fa-trash">
                                   </i>
                                   Delete
@@ -171,7 +171,7 @@ Facility Master List
                                       </div>
                                       <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <a href="{{url('delete-facility/'.$facility->id)}}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                        <a href="{{url('facilities/delete/'.$facility->id)}}"><button type="button" class="btn btn-danger">Delete</button></a>
                                       </div>
                                     </div>
                                     <!-- /.modal-content -->

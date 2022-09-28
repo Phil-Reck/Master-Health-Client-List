@@ -112,7 +112,11 @@ class FacilityController extends Controller
      */
     public function update(Request $request)
     {
-        $data = $request->validate([
+
+        // dd($request->facility_id);
+
+        $request->validate([
+            'facility_id' => 'required',
             'facility_name' => 'required',
             'mfl_code' => 'required',
             'facility_type' => 'required',
@@ -122,9 +126,18 @@ class FacilityController extends Controller
             'nurses' => 'required',
         ]);
 
-        Facility::where('id', $request -> input('facility_id'))->update($data);
+        Facility::where('id', $request->facility_id)->update([
+            'name' => $request->input('facility_name'),
+            'mfl_code' => $request->input('mfl_code'),
+            'facility_type' => $request->input('facility_type'),
+            'services' => $request->input('services'),
+            'operational_status' => $request->input('status'),
+            'no_of_doctors' => $request->input('doctors'),
+            'no_of_nurses' => $request->input('nurses'),
+        ]);
 
         return redirect('facilities');
+        // return view('facilities');
     }
 
 
@@ -134,8 +147,10 @@ class FacilityController extends Controller
      * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Facility $facility)
+    public function destroy($id)
     {
-        //
+        //Destroy the Facility
+        Facility::where('id', $id)->delete();
+        return redirect('facilities');
     }
 }
