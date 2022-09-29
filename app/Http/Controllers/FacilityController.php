@@ -95,12 +95,18 @@ class FacilityController extends Controller
         $facility_id = Facility::find($id)->id;
         $facility_name = Facility::find($id)->name;
         $facility_code = Facility::find($id)->mfl_code;
+        $facility_county = Facility::find($id)->county;
+        $facility_sub_county = Facility::find($id)->sub_county;
+        $facility_ward = Facility::find($id)->ward;
         $facility_type = Facility::find($id)->facility_type;
+        $facility_services = Facility::find($id)->services;
         $facility_status = Facility::find($id)->operational_status;
+        $facility_established = Facility::find($id)->date_established;
+        $facility_operational = Facility::find($id)->date_operational;
         $facility_doctors = Facility::find($id)->no_of_doctors;
         $facility_nurses = Facility::find($id)->no_of_nurses;
         // dd($facility_name);
-        return view('edit-facility', compact('facility', 'facility_name', 'facility_code', 'facility_type', 'facility_status', 'facility_doctors', 'facility_nurses', 'facility_id'));
+        return view('edit-facility', compact('facility', 'facility_name', 'facility_code', 'facility_type', 'facility_status', 'facility_services', 'facility_doctors', 'facility_nurses', 'facility_id', 'facility_county', 'facility_sub_county', 'facility_ward', 'facility_established', 'facility_operational'));
     }
 
     /**
@@ -115,25 +121,33 @@ class FacilityController extends Controller
 
         // dd($request->facility_id);
 
-        $request->validate([
-            'facility_id' => 'required',
-            'facility_name' => 'required',
-            'mfl_code' => 'required',
-            'facility_type' => 'required',
-            'services' => 'required',
-            'status' => 'required',
-            'doctors' => 'required',
-            'nurses' => 'required',
-        ]);
+        // $request->validate([
+        //     // 'facility_id' => 'required',
+        //     'facility_name' => 'required',
+        //     'mfl_code' => 'required',
+        //     'facility_type' => 'required',
+        //     'services' => 'required',
+        //     'status' => 'required',
+        //     'doctors' => 'required',
+        //     'nurses' => 'required',
+        // ]);
+
+
+        // dd('Working directory');
 
         Facility::where('id', $request->facility_id)->update([
             'name' => $request->input('facility_name'),
             'mfl_code' => $request->input('mfl_code'),
+            'county' => $request->input('county'),
+            'sub_county' => $request->input('sub_county'),
+            'ward' => $request->input('ward'),
             'facility_type' => $request->input('facility_type'),
             'services' => $request->input('services'),
             'operational_status' => $request->input('status'),
-            'no_of_doctors' => $request->input('doctors'),
-            'no_of_nurses' => $request->input('nurses'),
+            'date_established' => $request->input('established'),
+            'date_operational' => $request->input('operational'),
+            'no_of_doctors' => $request->input('facility_doctors'),
+            'no_of_nurses' => $request->input('facility_nurses'),
         ]);
 
         return redirect('facilities');

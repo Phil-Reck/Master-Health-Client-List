@@ -32,7 +32,7 @@ Route::prefix('facilities')->group(function () {
     Route::get('/', 'App\Http\Controllers\FacilityController@index');
     Route::post('/create', 'App\Http\Controllers\FacilityController@create');
     Route::get('edit/{id}', 'App\Http\Controllers\FacilityController@edit');
-    Route::post('update/', 'App\Http\Controllers\FacilityController@update');
+    Route::post('update/{id}', 'App\Http\Controllers\FacilityController@update');
     Route::get('delete/{id}', 'App\Http\Controllers\FacilityController@destroy');
     // Route::get("timetable/{email}", "LecturerController@lecTimetable");
 });

@@ -34,7 +34,7 @@ Community Units Master List
                     <div class="float-sm-right text-center mt-5 mb-3">
                 </div>
             </div>
-              <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
+              {{-- <div class="col-12 col-md-12 col-lg-12 order-2 order-md-1">
                 <div class="row">
                   <div class="col-12 col-sm-4">
                     <div class="info-box bg-light">
@@ -61,7 +61,7 @@ Community Units Master List
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
               {{-- <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
                 <h3 class="text-primary"><i class="fas fa-paint-brush"></i> AdminLTE v3</h3>
                 <p class="text-muted">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terr.</p>
@@ -113,7 +113,7 @@ Community Units Master List
                   <h3 class="card-title">DataTable with default features</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                {{-- <div class="card-body">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -543,7 +543,7 @@ Community Units Master List
                     </tr>
                     </tfoot>
                   </table>
-                </div>
+                </div> --}}
                 <!-- /.card-body -->
               </div>
           </div>
