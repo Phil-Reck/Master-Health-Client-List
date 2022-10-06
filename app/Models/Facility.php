@@ -23,4 +23,8 @@ class Facility extends Model
         'no_of_doctors',
         'no_of_nurses',
     ];
+
+    function clients(){
+        return $this->hasMany(Client::class, "name", "id");
+    }
 }

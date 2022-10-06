@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\Welcome;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +30,17 @@ Route::get('/', function () {
 //     return view('facilities');
 // })->middleware(['auth'])->name('facilities');
 
+Route::get('/email', function () {
+    Mail::to('philipmatunda@gmail.com')->send(new Welcome());
+    return new Welcome();
+});
+
 Route::prefix('facilities')->group(function () {
     Route::get('/', 'App\Http\Controllers\FacilityController@index');
     Route::post('/create', 'App\Http\Controllers\FacilityController@create');
     Route::get('edit/{id}', 'App\Http\Controllers\FacilityController@edit');
     Route::post('update/{id}', 'App\Http\Controllers\FacilityController@update');
     Route::get('delete/{id}', 'App\Http\Controllers\FacilityController@destroy');
-    // Route::get("timetable/{email}", "LecturerController@lecTimetable");
 });
 
 Route::get('/view-facility/{id}', 'App\Http\Controllers\FacilityController@viewFacility')->middleware(['auth'])->name('view-facility');
