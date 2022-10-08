@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/home', function () {
     return view('layouts.main');
-})->middleware(['auth'])->name('main');
+})->middleware(['auth', 'verified'])->name('main');
 Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth'])->name('main');
