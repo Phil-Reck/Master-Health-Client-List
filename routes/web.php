@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use App\Mail\Welcome;
-use Illuminate\Support\Facades\Mail;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,58 +15,17 @@ use Illuminate\Support\Facades\Mail;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/home', function () {
-    return view('layouts.main');
-})->middleware(['auth', 'verified'])->name('main');
 Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth'])->name('main');
-
-// Route::get('/facilities', function () {
-//     return view('facilities');
-// })->middleware(['auth'])->name('facilities');
-
-Route::get('/email', function () {
-    Mail::to('philipmatunda@gmail.com')->send(new Welcome());
-    return new Welcome();
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Route::prefix('facilities')->group(function () {
-    Route::get('/', 'App\Http\Controllers\FacilityController@index');
-    Route::post('/create', 'App\Http\Controllers\FacilityController@create');
-    Route::get('edit/{id}', 'App\Http\Controllers\FacilityController@edit');
-    Route::post('update/{id}', 'App\Http\Controllers\FacilityController@update');
-    Route::get('delete/{id}', 'App\Http\Controllers\FacilityController@destroy');
-});
-
-Route::get('/view-facility/{id}', 'App\Http\Controllers\FacilityController@viewFacility')->middleware(['auth'])->name('view-facility');
-
-Route::get('/community-units', function () {
-    return view('community-units');
-})->middleware(['auth'])->name('community-units');
-
-Route::prefix('client')->group(function () {
-    Route::get('/register', 'App\Http\Controllers\ClientController@index');
-    Route::post('/create', 'App\Http\Controllers\ClientController@create');
-    Route::get('/search', 'App\Http\Controllers\ClientController@search');
-    Route::get('/summary', 'App\Http\Controllers\ClientController@summary');
-});
-
-
-Route::get('/reports', function () {
-    return view('reports');
-});
-
-Route::get('/search-client', function () {
-    return view('search');
-})->middleware(['auth'])->name('search-client');
-
-Route::get('/client-summary', function () {
-    return view('client-summary');
-})->middleware(['auth'])->name('client-summary');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
